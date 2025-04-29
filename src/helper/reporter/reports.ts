@@ -40,16 +40,15 @@ export default class reports {
           //saveCollectedJSON: true,
           displayDuration: true,
           openReportInBrowser: false,
-          displayReportTime: true,
           metadata: {
             browser: {
-              name: "browser",
-              version: "metadata.browserVersion",
+              name: browser || 'unknown',
+              version: metadata.browserVersion || 'unknown',
             },
             device: 'Desktop',
             platform: {
-              name: mapOsIcon(os.type()),
-              version: mapOs(os.type())
+              name: mapOsIcon(os.type()) || 'unknown',
+              version: mapOs(os.type()) || 'unknown'
 
             },
           },
