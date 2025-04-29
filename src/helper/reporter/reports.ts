@@ -4,9 +4,12 @@ import { getEnv } from "../../helper/env/env";
 const fs = require("fs")
 const pathReport = require('path');
 
+const isCI = process.env.CI === 'true';
 
 
 export default class reports {
+
+
 
   public static generateReport() {
 
@@ -30,6 +33,13 @@ export default class reports {
     log("DURATIONN is :: ", duration)
     log("OS IS :: ", mapOsIcon(os.type()))
     log("OS VERSION IS :: ", mapOs(os.type()))
+    const osType = mapOsIcon(os.type()) || 'unknown';
+    const osRelease = mapOs(os.type()) || 'unknown';
+    const hostname = os.hostname() || 'unknown';
+    log("OS IS :: ", osType)
+    log("OS VERSION IS :: ", osRelease)
+    log("OS HOST IS :: ", hostname)
+
     //log("date is :: "+ START_TIME)
     if (!fs.existsSync(metadata)) {
 
@@ -42,15 +52,16 @@ export default class reports {
           //saveCollectedJSON: true,
           displayDuration: true,
           openReportInBrowser: false,
+          displayReportTime: true,
           metadata: {
             browser: {
               name: browser || 'unknown',
               version: metadata.browserVersion || 'unknown',
             },
-            device: 'Desktop',
+            device: isCI ? 'GitHub Actions Runner' : 'unk',
             platform: {
-              name: mapOsIcon(os.type()) || 'unknown',
-              version: mapOs(os.type()) || 'unknown'
+              name: isCI ? 'GitHub-hosted OS' : osType,
+              version: isCI ? 'auto-managed' : osRelease,
 
             },
           },
