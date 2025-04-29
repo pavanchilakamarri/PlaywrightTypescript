@@ -1,0 +1,52 @@
+{
+  "name": "the-playwright-typescript-automation-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "beforetest": "npx ts-node src/helper/reporter/init.ts",
+    "test": "npm run beforetest && cross-env ENV=qa BROWSER=chrome HEADLESS=true Type=Web cucumber-js --format json:./reports/chrome/cucumber-report.json --tags @loginPageSauce || true && npm run run-all chrome",
+    "testFirefox": "npm run beforetest && cross-env ENV=qa BROWSER=firefox HEADLESS=false Type=Web cucumber-js --tags @loginTest || true && npm run run-all chrome ",
+    "testWebkit": "npx ts-node src/helper/reporter/init.ts && cross-env ENV=qa BROWSER=webkit HEADLESS=false Type=Web cucumber-js --tags @loginTest || true  && npm run run-all chrome",
+    "run-all": "ts-node src/helper/scripts/run-all.ts",
+    "aftertest": "npx ts-node src/helper/reporter/reports.ts",
+    "send-report": "npx cross-env ENV=qa ts-node src/helper/email/run.ts",
+    "summary": "npx ts-node src/helper/email/custom-reporter.ts",
+    "test:failed": "cucumber-js -p rerun @rerun.txt",
+    "testrepo": "npx ts-node src/helper/reporter/reports.ts",
+    "test:chrome": "npm run beforetest && cross-env ENV=qa BROWSER=chrome HEADLESS=true Type=Web cucumber-js --format json:./reports/chrome/cucumber-report.json --tags @failedScenario || true && npx ts-node src/helper/reporter/reports.ts chrome",
+    "test:firefox": "cross-env ENV=qa BROWSER=firefox HEADLESS=true Type=Web cucumber-js --format json:./reports/firefox/cucumber-report.json --tags @failedScenario || true  && npx ts-node src/helper/reporter/reports.ts firefox",
+    "test:webkit": "cross-env ENV=qa BROWSER=webkit HEADLESS=true Type=Web cucumber-js --format json:./reports/webkit/cucumber-report.json --tags @failedScenario || true  && npx ts-node src/helper/reporter/reports.ts webkit",
+    "testAllBrowsers": "npm run beforetest && npm-run-all --parallel test:chrome test:firefox test:webkit  && npm run send-report all",
+    "demo": "cross-env ENV=qa BROWSER=chrome HEADLESS=true Type=Web cucumber-js --tags @loginTest || true",
+    "pretest:API": "npx ts-node src/helper/reporter/init.ts",
+    "test:API": "cross-env ENV=qa Type=API cucumber-js --format json:./reports/API/cucumber-report.json -p api || true",
+    "posttest:API": "npx ts-node src/helper/reporter/reports_API.ts && npx cross-env ENV=qa ts-node src/helper/email/run.ts API"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.2.0",
+    "@faker-js/faker": "^9.5.0",
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.10.2",
+    "adm-zip": "^0.5.16",
+    "axios": "^1.8.4",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.5.0",
+    "fs-extra": "^11.3.0",
+    "google-auth-library": "^9.15.1",
+    "googleapis": "^148.0.0",
+    "multiple-cucumber-html-reporter": "^3.3.0",
+    "npm-run-all": "^4.1.5",
+    "playwright": "^1.49.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2",
+    "winston": "^3.17.0"
+  },
+  "dependencies": {
+    "@slack/web-api": "^7.9.1",
+    "nodemailer": "^6.10.1"
+  }
+}

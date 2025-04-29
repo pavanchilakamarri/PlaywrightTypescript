@@ -1,0 +1,36 @@
+# Node.js dependencies
+node_modules/
+
+
+# Playwright and Cucumber reports
+cucumber-report/
+playwright-report/
+run-meta/
+test-results/
+reports/
+src/helper/env/.env.*
+@rerun.txt
+
+# Videos and media
+*.mp4
+
+# Sensitive files
+service-account.json
+
+# Build artifacts
+dist/
+out/
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Playwright
+/playwright-report/
+/blob-report/
+/playwright/.cache/
