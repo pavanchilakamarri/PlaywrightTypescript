@@ -34,3 +34,8 @@ out/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Playwright folders  
+tests
+tests-examples
+e2e

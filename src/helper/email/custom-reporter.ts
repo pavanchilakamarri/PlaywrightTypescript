@@ -122,13 +122,13 @@ const metaDir = './run-meta';
 function getMetaFiles(browser: string): string[] {
   const files = fs.readdirSync(metaDir);
 
-  if (browser.toLowerCase() === 'all') {
+  if (browser === 'all') {
     log("CAME to IF for multiple files...")
     return files
       .filter(file => file.endsWith('-run-meta.json'))
       .map(file => path.join(metaDir, file));
   } else {
-    const targetFile = `${browser.toLowerCase()}-run-meta.json`;
+    const targetFile = `${browser}-run-meta.json`;
     const fullPath = path.join(metaDir, targetFile);
     return fs.existsSync(fullPath) ? [fullPath] : [];
   }
