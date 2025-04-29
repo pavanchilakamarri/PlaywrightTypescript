@@ -29,7 +29,10 @@ jobs:
         echo "ACCESS_TOKEN=${{ secrets.SLACKCHANNELID }}" >> .env.qa
         echo "USERNAME=${{ secrets.SLACKTOKEN }}" >> .env.qa
       shell: bash
-
+    - name: Decode service-account.json
+      run: |
+        echo "${{ secrets.SERVICE_ACCOUNT }}" | base64 --decode > service-account.json
+        mv service-account.json ./ # if needed
     - name: Run Playwright tests
       run: npm run test
     - uses: actions/upload-artifact@v4

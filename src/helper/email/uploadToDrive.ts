@@ -12,31 +12,6 @@ const auth = new google.auth.GoogleAuth({
   scopes: SCOPES,
 });
 
-/* 
-const drive = google.drive({ version: 'v3', auth });
-const folderId = process.env.GDRIVE_FOLDER_ID!;
-const reportFilePath = path.join('./cucumber-report/report/index.html');
-log("PATH is :: ", reportFilePath);
-if (!fs.existsSync(reportFilePath)) {
-  console.error('HTML report not found.');
-  return null;
-}
-
-const fileMetadata = {
-  name: `Test_Report_${new Date().toISOString().replace(/[:.]/g, '-')}.html`,
-  parents: [folderId],
-};
-
-const media = {
-  mimeType: 'text/html',
-  body: fs.createReadStream(reportFilePath),
-};
-
-const response = await drive.files.create({
-  requestBody: fileMetadata,
-  media: media,
-  fields: 'id, webViewLink',
-}); */
 
 export async function uploadFileToDrive(filePath: string, fileName: string): Promise<string | null> {
   const drive = google.drive({ version: 'v3', auth });

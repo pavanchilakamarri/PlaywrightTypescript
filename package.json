@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "beforetest": "npx ts-node src/helper/reporter/init.ts",
-    "test": "npm run beforetest && cross-env ENV=qa BROWSER=chrome HEADLESS=true Type=Web cucumber-js --format json:./reports/chrome/cucumber-report.json --tags @loginPageSauce || true && npm run run-all chrome",
+    "test": "npm run beforetest && cross-env ENV=qa BROWSER=chrome HEADLESS=true Type=Web cucumber-js --format json:./reports/chrome/cucumber-report.json --tags @loginPageSauce || true && npx ts-node src/helper/reporter/reports.ts chrome && npm run send-report chrome",
     "testFirefox": "npm run beforetest && cross-env ENV=qa BROWSER=firefox HEADLESS=false Type=Web cucumber-js --tags @loginTest || true && npm run run-all chrome ",
     "testWebkit": "npx ts-node src/helper/reporter/init.ts && cross-env ENV=qa BROWSER=webkit HEADLESS=false Type=Web cucumber-js --tags @loginTest || true  && npm run run-all chrome",
     "run-all": "ts-node src/helper/scripts/run-all.ts",
