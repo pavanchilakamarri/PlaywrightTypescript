@@ -17,15 +17,15 @@ const AdmZip = require('adm-zip');
     const reportLink = await uploadFileToDrive('./cucumber-report/Cucumber-report.zip', 'TestReport.zip');
     const stats = extractStats();
     if (
-        (process.env.SendEmail?.trim() === 'true') ||
-        (process.env.Slack?.trim() === 'true')
+        (process.env.SendEmail === 'true') ||
+        (process.env.Slack === 'true')
     ) {
         if (reportLink) {
-            if ((process.env.SendEmail).trim() === 'true') {
+            if ((process.env.SendEmail) === 'true') {
                 console.log("process.env.SendEmail", process.env.SendEmail)
                 await sendEmail(reportLink);
             }
-            if ((process.env.Slack).trim() === 'true') {
+            if ((process.env.Slack) === 'true') {
                 console.log("process.env.Slack", process.env.Slack)
                 await sendSlackReportMessage(reportLink);
             }
