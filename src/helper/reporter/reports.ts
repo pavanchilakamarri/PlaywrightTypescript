@@ -28,6 +28,8 @@ export default class reports {
     const report = require('multiple-cucumber-html-reporter');
     const duration = getDurationInSeconds(metadata.startTime, metadata.endTime);
     log("DURATIONN is :: ", duration)
+    log("OS IS :: ", mapOsIcon(os.type()))
+    log("OS VERSION IS :: ", mapOs(os.type()))
     //log("date is :: "+ START_TIME)
     if (!fs.existsSync(metadata)) {
 
@@ -60,12 +62,12 @@ export default class reports {
               { label: "Environment", value: metadata.env },
               { label: 'Execution Start Time', value: metadata.startTime },
               { label: "Execution End Time", value: metadata.endTime },
-              { label: "Total Execution Time", value:  duration + " hh:mm:ss(format)" },
+              { label: "Total Execution Time", value: duration + " hh:mm:ss(format)" },
             ],
           },
         });
         console.log("REPORT GOT CREATED SUCCESSFULLY...")
-      } catch(error){
+      } catch (error) {
         console.error('❌ Error during test report creation:', error);
       }
     } else {
