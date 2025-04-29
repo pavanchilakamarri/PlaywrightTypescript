@@ -9,7 +9,7 @@ const AdmZip = require('adm-zip');
 (async () => {
     getEnv()
     const browser = process.argv[2];
-    if (browser.toLowerCase() == 'all')
+    if (browser == 'all')
         zipFolder(`./reports/report/`, './cucumber-report/Cucumber-report.zip');
     else
         zipFolder(`./reports/report/${browser}/`, './cucumber-report/Cucumber-report.zip');
@@ -17,15 +17,15 @@ const AdmZip = require('adm-zip');
     const reportLink = await uploadFileToDrive('./cucumber-report/Cucumber-report.zip', 'TestReport.zip');
     const stats = extractStats();
     if (
-        (process.env.SendEmail?.trim().toLowerCase() === 'true') ||
-        (process.env.Slack?.trim().toLowerCase() === 'true')
+        (process.env.SendEmail?.trim() === 'true') ||
+        (process.env.Slack?.trim() === 'true')
     ) {
         if (reportLink) {
-            if ((process.env.SendEmail).trim().toLowerCase() === 'true') {
+            if ((process.env.SendEmail).trim() === 'true') {
                 console.log("process.env.SendEmail", process.env.SendEmail)
                 await sendEmail(reportLink);
             }
-            if ((process.env.Slack).trim().toLowerCase() === 'true') {
+            if ((process.env.Slack).trim() === 'true') {
                 console.log("process.env.Slack", process.env.Slack)
                 await sendSlackReportMessage(reportLink);
             }
