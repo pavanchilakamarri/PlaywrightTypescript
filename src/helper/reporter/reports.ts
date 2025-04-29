@@ -43,8 +43,8 @@ export default class reports {
           displayReportTime: true,
           metadata: {
             browser: {
-              name: browser,
-              version: metadata.browserVersion,
+              name: "browser",
+              version: "metadata.browserVersion",
             },
             device: 'Desktop',
             platform: {
