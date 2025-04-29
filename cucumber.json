@@ -1,0 +1,56 @@
+{
+    "default": {
+        "paths": [
+            "src/test/features/*.feature"
+        ],
+        "require": [
+            "src/test/steps/*.ts",
+            "src/test/hooks/hooks.ts"
+        ],
+        "dryRun": false,
+        "retry": 1,
+        "requireModule": [
+                "ts-node/register"
+        ],
+        "format":[
+            "progress-bar"
+        ],
+        "parallel": 1       
+    },
+    "api": {
+        "tags":"@GetProject",
+        "paths": [
+            "src/test/features/API/*.feature"
+        ],
+        "require": [
+            "src/test/steps/api/*.ts",
+            "src/test/hooks/hooks.ts"
+        ],
+        "dryRun": false,
+        "retry": 2,
+        "requireModule": [
+                "ts-node/register"
+        ],
+        "format":[
+            "progress-bar"
+        ],
+        "parallel": 1
+    },
+    "rerun": {
+        
+        "require": [
+            "src/test/steps/*.ts",
+            "src/test/hooks/hooks.ts"
+        ],
+        "dryRun": false,
+        "requireModule": [
+                "ts-node/register"
+        ],
+        "format":[
+            "progress-bar",
+            "html:cucumber-report/cucumber-report.html",
+            "json:cucumber-report/cucumber-report.json"
+        ],
+        "parallel": 2
+    }
+}
